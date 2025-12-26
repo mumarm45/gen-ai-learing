@@ -1,10 +1,11 @@
 import os
-import sys
 from dotenv import load_dotenv
 from langchain_anthropic import ChatAnthropic
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnableLambda
+from langchain_core.prompts import PromptTemplate
 
-def llm_model_langchain(prompt, params=None):
+def llm_model_langchain(params=None):
 
     load_dotenv()
     params = params or {}
@@ -17,7 +18,6 @@ def llm_model_langchain(prompt, params=None):
     max_tokens = params.get("max_tokens", 400)
     temperature = params.get("temperature", 0.7)
 
-   
 
     llm = ChatAnthropic(
         api_key=api_key,
@@ -26,5 +26,21 @@ def llm_model_langchain(prompt, params=None):
         temperature=temperature,
     )
 
-    chain = llm | StrOutputParser()
-    return chain.invoke(prompt)
+    template = """Tell me a {adjective} joke about {content}.
+"""
+    prompt = PromptTemplate.from_template(template)
+    def format_prompt(variables):
+      return prompt.format(**variables)
+    joke_chain = (
+    RunnableLambda(format_prompt)
+    | llm 
+    | StrOutputParser()
+)
+
+    result = joke_chain.invoke({"adjective": "sad", "content": "dogs"})
+    return result
+
+
+if __name__ == "__main__":
+    result = llm_model_langchain()
+    print(result)
