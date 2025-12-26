@@ -1,4 +1,5 @@
 from langchain_core.output_parsers import JsonOutputParser
+from langchain.output_parsers import CommaSeparatedListOutputParser
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.prompts import PromptTemplate
 from langchain_anthropic import ChatAnthropic
@@ -41,5 +42,22 @@ def json_parser_chain():
 
     return chain.invoke({"query": joke_query})
 
+def comma_separated_list_parser_chain():
+    joke_query = "Tell me a joke."
+    
+    output_parser = CommaSeparatedListOutputParser()
+
+    format_instructions = output_parser.get_format_instructions()
+
+    prompt = PromptTemplate(
+        template="Answer the user query.\n{format_instructions}\n{query}\n",
+        input_variables=["query"],
+        partial_variables={"format_instructions": format_instructions},
+    )
+
+    chain = prompt | llm_model() | output_parser
+
+    return chain.invoke({"query": joke_query})
+
 if __name__ == "__main__":
-    print(json_parser_chain())
+    print(comma_separated_list_parser_chain())
