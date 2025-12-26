@@ -115,5 +115,28 @@ def role_play():
         print("Answer:", result)
     return result
 
+
+def movie_review():
+    reviews = [
+    "I love this smartphone! The camera quality is exceptional and the battery lasts all day. The only downside is that it heats up a bit during gaming.",
+    "This laptop is terrible. It's slow, crashes frequently, and the keyboard stopped working after just two months. Customer service was unhelpful."
+   ]
+
+    template = """
+    Analyze the following product review:
+    "{review}"
+
+    Provide your analysis in the following format:
+    - Sentiment: (positive, negative, or neutral)
+    - Key Features Mentioned: (list the product features mentioned)
+    - Summary: (one-sentence summary)
+    """
+    
+    for i, review in enumerate(reviews):
+        result = llm_model_langchain(template, 
+        {"review number": i, "review": review})
+        print("Analysis:", result)
+    return result
+
 if __name__ == "__main__":
-    role_play()
+    movie_review()
