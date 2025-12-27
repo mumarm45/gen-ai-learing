@@ -20,7 +20,7 @@ def rag_answer(
 ):
     vectorstore = load_chroma(persist_dir=persist_dir, 
     collection_name=collection_name, embedding_model_name=embedding_model_name)
-    docs = vectorstore.similarity_search(question, k=k)
+    docs = use_similarity_search(question, k)
     context = "\n\n".join(
         f"[Chunk {i + 1}]\n{d.page_content}" for i, d in enumerate(docs)
     )
@@ -46,6 +46,15 @@ def rag_answer(
 
     chain = prompt | RunnableLambda(lambda v: llm_model(v.to_string())) | StrOutputParser()
     return chain.invoke({"context": context, "question": question})
+
+def use_retrievers(question, k):
+    vectorstore = load_chroma(persist_dir="../chroma_db", collection_name="pdf")
+    retriever = vectorstore.as_retriever(search_kwargs={"k": k})
+    return retriever.invoke(question)
+def  use_similarity_search(question, k):
+    vectorstore = load_chroma(persist_dir="../chroma_db", collection_name="pdf")
+    docs = vectorstore.similarity_search(question, k=k)
+    return docs  
 
 if __name__ == "__main__":
     print(rag_answer())
