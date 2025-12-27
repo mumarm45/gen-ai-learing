@@ -2,7 +2,7 @@
 from langchain.chains import LLMChain, SequentialChain
 from langchain_core.prompts import PromptTemplate, ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.messages import HumanMessage
-from llm_chatomodel import llm_model
+from custom_langchain.llm_chatomodel import llm_model
 
 
 def country_chain():

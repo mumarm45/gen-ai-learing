@@ -14,6 +14,7 @@ def rag_answer(
     vectorstore = load_chroma(persist_dir=persist_dir, 
     collection_name=collection_name, embedding_model_name=embedding_model_name)
     docs = use_similarity_search(question, k)
+    print(docs[0].metadata)
     context = "\n\n".join(
         f"[Chunk {i + 1}]\n{d.page_content}" for i, d in enumerate(docs)
     )

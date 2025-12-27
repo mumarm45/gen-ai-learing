@@ -2,7 +2,7 @@ from langchain_core.output_parsers import JsonOutputParser
 from langchain.output_parsers import CommaSeparatedListOutputParser
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.prompts import PromptTemplate
-from llm_chatomodel import llm_model
+from custom_langchain.llm_chatomodel import llm_model
 
 
 class Joke(BaseModel):

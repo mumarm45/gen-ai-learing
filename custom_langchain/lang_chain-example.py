@@ -4,7 +4,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnableLambda
 from langchain_core.prompts import PromptTemplate
-from llm_chatomodel import llm_model
+from custom_langchain.llm_chatomodel import llm_model
 
 def llm_model_langchain(template, template_variables, params=None):
 
