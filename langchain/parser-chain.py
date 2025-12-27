@@ -2,23 +2,7 @@ from langchain_core.output_parsers import JsonOutputParser
 from langchain.output_parsers import CommaSeparatedListOutputParser
 from langchain_core.pydantic_v1 import BaseModel, Field
 from langchain_core.prompts import PromptTemplate
-from langchain_anthropic import ChatAnthropic
-from dotenv import load_dotenv
-import os
-
-
-def llm_model():
-    load_dotenv()
-    api_key = os.getenv("ANTHROPIC_API_KEY")
-    if not api_key:
-        raise ValueError("Please set the ANTHROPIC_API_KEY in your .env file")
-
-    return ChatAnthropic(
-        api_key=api_key,
-        model="claude-3-haiku-20240307",
-        temperature=0.7,
-        max_tokens=400,
-    )
+from llm_chatomodel import llm_model
 
 
 class Joke(BaseModel):
@@ -59,5 +43,27 @@ def comma_separated_list_parser_chain():
 
     return chain.invoke({"query": joke_query})
 
+def json_output_chain2():
+    output_parser = JsonOutputParser()
+    format_instructions = """RESPONSE FORMAT: Return ONLY a single JSON object—no markdown, no examples, no extra keys.  It must look exactly like:
+    {
+     "title": "movie title",
+     "director": "director name",
+      "year": 2000,
+      "genre": "movie genre"
+    }"""
+
+    prompt_template = PromptTemplate(
+    template="""You are a JSON-only assistant.
+
+    Task: Generate info about the movie "{movie_name}" in JSON format.
+
+    {format_instructions}
+    """,
+    input_variables=["movie_name", "format_instructions"],
+    )
+
+    chain = prompt_template | llm_model() | output_parser
+    return chain.invoke({"movie_name": "Inception", "format_instructions": format_instructions})
 if __name__ == "__main__":
-    print(comma_separated_list_parser_chain())
+    print(json_output_chain2())
