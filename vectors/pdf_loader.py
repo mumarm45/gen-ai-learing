@@ -1,6 +1,6 @@
 
 from langchain_community.document_loaders import PyPDFLoader
-from splitter import recursive_text_splitter
+from .splitter import recursive_text_splitter
 def pdf_loader(filepath):
     loader = PyPDFLoader(filepath)
     documents = loader.load()

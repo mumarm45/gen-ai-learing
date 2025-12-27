@@ -6,10 +6,10 @@ if "TOKENIZERS_PARALLELISM" not in os.environ:
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
 from langchain_chroma import Chroma
-from web_loader import web_loader
-from pdf_loader import pdf_loader
-from embeddings_model import embeddings_model
-from splitter import recursive_text_splitter
+from .web_loader import web_loader
+from .pdf_loader import pdf_loader
+from .embeddings_model import embeddings_model
+from .splitter import recursive_text_splitter
 
 def build_chroma_from_documents(
     documents,

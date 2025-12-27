@@ -1,4 +1,4 @@
-from rag_answer import rag_answer
+from .rag_answer import rag_answer
 def chat_answer():     
     while True:
         query = input("Question: ")
@@ -12,4 +12,4 @@ def chat_answer():
     return result
 
 if __name__ == "__main__":
-    chat_answer() 
+    chat_answer()
