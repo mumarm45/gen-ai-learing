@@ -33,7 +33,13 @@ def rag_answer(
             ),
             (
                 "human",
-                "Context:\n{context}\n\nQuestion: {question}\n\nAnswer:",
+                """
+                Context:{context}
+                
+                Question: {question}
+
+                Answer:
+                """,
             ),
         ]
     )
