@@ -1,6 +1,10 @@
 from loader_vector import load_chroma
+import os
+
+root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 def test_vector(
-    persist_dir: str = "../chroma_db",
+    persist_dir: str = os.path.join(root, "chroma_db"),
     collection_name: str = "pdf",
     embedding_model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
 ):

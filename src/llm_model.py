@@ -2,6 +2,7 @@ from anthropic import Anthropic
 from dotenv import load_dotenv
 import os
 
+
 def llm_model(prompt, params=None):
     load_dotenv()
 
@@ -16,8 +17,8 @@ def llm_model(prompt, params=None):
     max_tokens = params.get("max_tokens", 400)
     min_new_tokens = params.get("min_new_tokens", 10)
     temperature = params.get("temperature", 0.7)
-    top_p = params.get("top_p") 
-    top_k = params.get("top_k") 
+    top_p = params.get("top_p")
+    top_k = params.get("top_k")
     system = params.get("system")
     stop_sequences = params.get("stop_sequences")
 

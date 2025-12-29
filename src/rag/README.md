@@ -32,7 +32,7 @@ python -m vectors.build_vector
 Build the vector store from a specific PDF (one-liner):
 
 ```bash
-python -c "from vectors.build_vector import build_chroma_from_pdf; build_chroma_from_pdf(filepath='./resume.pdf', persist_dir='./chroma_db', collection_name='pdf')"
+python-genai % python -c "from vectors.build_vector import build_chroma_from_pdf; build_chroma_from_pdf(filepath='./resume.pdf', persist_dir='./chroma_db', collection_name='pdf')"
 ```
 
 This creates a persisted vector store in the `chroma_db/` directory.

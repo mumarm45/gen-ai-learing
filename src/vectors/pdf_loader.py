@@ -1,6 +1,8 @@
-
 from langchain_community.document_loaders import PyPDFLoader
-from .splitter import recursive_text_splitter
+try:
+    from .splitter import recursive_text_splitter
+except ImportError:  # pragma: no cover
+    from splitter import recursive_text_splitter
 def pdf_loader(filepath):
     loader = PyPDFLoader(filepath)
     documents = loader.load()
