@@ -1,0 +1,42 @@
+[project]
+name = "genai-rag"
+version = "0.1.0"
+description = "Generative AI RAG application for document processing and question answering, learning from documents"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "anthropic>=0.40.0",
+    "python-dotenv>=1.0.0",
+    "langchain==0.2.11",
+    "langchain-core==0.2.43",
+    "langchain-anthropic==0.1.20",
+    "langchain-community==0.2.10",
+    "langchain-experimental==0.0.62",
+    "langchainhub==0.1.18",
+    "pypdf>=4.0.0",
+    "chromadb>=0.5.0",
+    "sentence-transformers>=2.7.0",
+    "langchain-huggingface>=0.0.3",
+    "langchain-chroma>=0.1.4",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=5.0.0",
+    "fastapi>=0.110.0",
+    "uvicorn>=0.29.0",
+    "wget==3.2"
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = [
+    "rag*",
+    "LCEL*",
+    "flask*",
+    "vectors*",
+    "chroma_db*",
+    "advance_rag*",
+    "custom_langchain*",
+    "prompt_engineering_methods*",
+    "tools*"
+]
