@@ -21,7 +21,8 @@ def create_prompt_template():
         PromptTemplate: The prompt template to use for document-based QA.
     """
     template = """Use the following pieces of context to answer the question at the end. 
-If you don't know the answer, just say that you don't know, don't try to make up an answer.
+If you don't know the answer, just say that you don't know, don't try to make up an answer. 
+If asked to summarize, provide a concise summary.
 
 {context}
 
