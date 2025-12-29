@@ -26,7 +26,7 @@ except ImportError:  # pragma: no cover
 def build_chroma_from_documents(
     documents,
     persist_dir: str = os.path.join(root, "chroma_db"),
-    collection_name: str = "docs",
+    collection_name: str = "pdf",
     embedding_model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
     ):
     if not documents:

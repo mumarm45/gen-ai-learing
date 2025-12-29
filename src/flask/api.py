@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Request
+from fastapi import HTTPException
 from rag.rag_answer import rag_answer
 
 app = FastAPI()
@@ -16,13 +17,13 @@ async def ask_question(request: Request):
     question = data.get('question', '')
     
     if not question:
-        return {"error": "No question provided"}, 400
+        raise HTTPException(status_code=400, detail="No question provided")
     
     try:
         answer = rag_answer(question)
         return {"answer": answer}
     except Exception as e:
-        return {"error": str(e)}, 500
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/health")
 def health_check():

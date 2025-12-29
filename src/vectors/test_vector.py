@@ -1,4 +1,4 @@
-from loader_vector import load_chroma
+from vectors.loader_vector import load_chroma
 import os
 
 root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

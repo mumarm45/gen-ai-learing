@@ -23,7 +23,8 @@ dependencies = [
     "lxml>=5.0.0",
     "fastapi>=0.110.0",
     "uvicorn>=0.29.0",
-    "wget==3.2"
+    "wget==3.2",
+    "pytest>=8.0.0",
 ]
 
 [build-system]
